@@ -32,3 +32,18 @@ npm start
 1. Добавьте бота в группу (или канал — тогда сделайте его администратором с правом публикации).
 2. Узнайте ID чата, например переслав сообщение из него боту [@userinfobot](https://t.me/userinfobot) или через `https://api.telegram.org/bot<TOKEN>/getUpdates` после сообщения в группе. ID групп обычно имеет вид `-100…`.
 3. Укажите его в `REVIEWS_CHAT_ID`.
+
+## Где работает
+
+Сервер **server0** (`104.194.158.147`, тот же, где остальные боты), папка `/officereviewbot`, процесс pm2 `officereviewbot`.
+
+Обновить после изменений (с локальной машины, из папки проекта):
+
+```bash
+rsync -az --exclude node_modules --exclude .env --exclude .git ./ server0:/officereviewbot/
+ssh server0 'cd /officereviewbot && npm ci --omit=dev && pm2 restart officereviewbot'
+```
+
+Логи: `ssh server0 'pm2 logs officereviewbot --lines 50'`.
+
+`.env` на сервере лежит только там и в репозиторий не попадает. Один и тот же токен нельзя запускать одновременно локально и на сервере — Telegram отдаст ошибку 409 Conflict.
