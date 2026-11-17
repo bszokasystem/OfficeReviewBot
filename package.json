@@ -1,0 +1,19 @@
+{
+  "name": "office-review-bot",
+  "version": "1.0.0",
+  "description": "Telegram-бот для сбора отзывов по номеру заявки",
+  "type": "module",
+  "main": "src/bot.js",
+  "scripts": {
+    "start": "node --env-file=.env src/bot.js",
+    "dev": "node --watch --env-file=.env src/bot.js"
+  },
+  "engines": {
+    "node": ">=20.6"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "grammy": "^1.46.0"
+  }
+}
